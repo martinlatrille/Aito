@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 # Python imports
@@ -33,6 +32,10 @@ class App:
   """
   Main entry
   """
+
+  def printErrorNoSetFound(self):
+    print printout(settings.strings['errorNoSetFound'], settings.colors['errors'])
+
   def printIntro(self):
     print printout(settings.strings['intro'], settings.colors['intro'])
 
@@ -41,11 +44,20 @@ class App:
 
   def printSetResult(self, use_case, nb_tests, nb_ok, total_response_time):
     percent = int(100 * (float(nb_ok) / float(nb_tests)))
-    print printout(settings.strings['setResult'].format(nb_tests_passed=nb_ok, nb_tests_total=nb_tests, percent=percent, className=use_case.__class__.__name__), settings.colors['setResult'])
+    print printout(
+      settings.strings['setResult'].format(nb_tests_passed=nb_ok,
+                                           nb_tests_total=nb_tests,
+                                           percent=percent,
+                                           className=use_case.__class__.__name__),
+      settings.colors['setResult'])
 
   def printTotalResult(self, nb_tests, nb_ok, total_response_time):
     percent = int(100 * (float(nb_ok) / float(nb_tests)))
-    print printout(settings.strings['totalResult'].format(nb_tests_passed=nb_ok, nb_tests_total=nb_tests, percent=percent), settings.colors['totalResult'])
+    print printout(
+      settings.strings['totalResult'].format(nb_tests_passed=nb_ok,
+                                             nb_tests_total=nb_tests,
+                                             percent=percent),
+      settings.colors['totalResult'])
 
     if percent == 100:
       print printout(settings.strings['buildOk'], settings.colors['buildOk'])
@@ -59,6 +71,10 @@ class App:
     dataTotal = {}
     dataTotal['index'] = 0
     dataTotal['nb_ok'] = 0
+
+    if len(useCases) == 0:
+      self.printErrorNoSetFound()
+      return
 
     self.printIntro()
 
@@ -95,4 +111,5 @@ class App:
       dataTotal['index'] += dataUseCase['index']
       dataTotal['nb_ok'] += dataUseCase['nb_ok']
       self.printSetResult(u, dataUseCase['index'], dataUseCase['nb_ok'], 0)
+
     self.printTotalResult(dataTotal['index'], dataTotal['nb_ok'], 0)

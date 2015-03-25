@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 sets = [
-  'usecase1'
+  'usecase1',
 ]
 
 strings = {
@@ -13,7 +13,10 @@ strings = {
   'testOutputFormat': '[{success}] [code : {return_code}] [{elapsed}ms] {doc}',
   'testSuccess': 'OK',
   'testFailure': 'KO',
-  'testDirtyFailure': '[KO] [DIRTY]'
+  'testDirtyFailure': '[KO] [DIRTY]',
+
+  'errorNoSetFound': 'No tests found. Exiting.',
+
 }
 
 BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE = range(8)
@@ -27,5 +30,6 @@ colors = {
   'buildKo': RED,
   'testSuccess': GREEN,
   'testFailure': RED,
-  'testDirtyFailure': RED
+  'testDirtyFailure': RED,
+  'errors': RED,
 }

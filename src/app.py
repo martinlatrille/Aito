@@ -1,7 +1,11 @@
-#!../../env/bin/python
+# -*- coding: utf-8 -*-
 
 # Python import
-import re
+import re, sys, os
+
+sys.path.append(os.path.realpath(__file__))
+
+import uc.usecase1
 
 # Local import
 import core, settings
@@ -17,7 +21,6 @@ def getUseCases():
         test_sets.append(obj())
 
   return test_sets
-
 
 if __name__ == "__main__":
   useCases = getUseCases()
