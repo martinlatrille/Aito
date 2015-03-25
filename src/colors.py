@@ -1,4 +1,4 @@
-#coding: utf-8
+# -*- coding: utf-8 -*-
 
 import sys
 BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE = range(8)
@@ -16,8 +16,8 @@ def has_colours(stream):
     except:
         # guess false in case of error
         return False
+      
 has_colours = has_colours(sys.stdout)
-
 
 def printout(text, colour=WHITE):
         if has_colours:

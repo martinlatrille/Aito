@@ -1,10 +1,10 @@
 #!/usr/bin/python
-#coding: utf-8
+# -*- coding: utf-8 -*-
 
 import re, requests
+import settings
 from colors import *
 
-BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE = range(8)
 useCases = []
           
 class UseCase:
@@ -13,9 +13,6 @@ class UseCase:
   """
   def __init__(self):
     useCases.append(self)
-  
-  def __str__(self):
-    return "AbstractUseCase"
   
   def setUp(self):
     return
@@ -33,7 +30,6 @@ class UseCase:
       success = False
     
     return {'success': success, 'code': response.status_code, 'elapsed': response.elapsed}
-      
 
 class UseCase1(UseCase):
   """
@@ -46,7 +42,7 @@ class UseCase1(UseCase):
     """
     response = requests.get('http://google.com/')
     return self.expect(response, code=200)
-  
+
 class UseCase5(UseCase):
   """
   Martin wants to register to letsbro
@@ -58,23 +54,26 @@ class UseCase5(UseCase):
     """
     response = requests.get('http://google.com/')
     return self.expect(response, code=200)
-  
+
 class App:
   """
   Main entry
   """
+  def printIntro(self):
+    print printout(settings.strings['intro'], settings.colors['intro'])
+    
   def printSetResult(self, use_case, nb_tests, nb_ok, total_response_time):
     percent = int(100 * (float(nb_ok) / float(nb_tests)))
-    print printout("Total for {3} : {0} / {1} successful tests ({2}%)\n---\n".format(nb_ok, nb_tests, percent, use_case.__class__.__name__), CYAN)
+    print printout(settings.strings['setResult'].format(nb_tests_passed=nb_ok, nb_tests_total=nb_tests, percent=percent, className=use_case.__class__.__name__), settings.colors['setResult'])
     
   def printTotalResult(self, nb_tests, nb_ok, total_response_time):
     percent = int(100 * (float(nb_ok) / float(nb_tests)))
-    print printout("Total : {0} / {1} successful tests ({2}%)".format(nb_ok, nb_tests, percent), MAGENTA)
+    print printout(settings.strings['totalResult'].format(nb_tests_passed=nb_ok, nb_tests_total=nb_tests, percent=percent), settings.colors['totalResult'])
     
     if percent == 100:
-      print printout('\n\n  [BUILD: OK]\n\n', GREEN)
+      print printout(settings.strings['buildOk'], settings.colors['buildOk'])
     else:
-      print printout('\n\n  [BUILD: KO]\n\n', RED)
+      print printout(settings.strings['buildKo'], settings.colors['buildKo'])
     
   def process(self, useCases):
     """
@@ -84,7 +83,7 @@ class App:
     dataTotal['index'] = 0
     dataTotal['nb_ok'] = 0
     
-    print printout('---\n', CYAN)
+    self.printIntro()
     
     for u in useCases:
       
@@ -98,29 +97,29 @@ class App:
         if re.match('test_*', f):
           dataUseCase['index'] += 1
           func = getattr(u, f)
-          to_print = func.__doc__.strip('\n')
+          func_doc = func.__doc__.strip('\n')
           
           try:
             dataTest = func()
             
             if dataTest['success']:
-              success = printout('[OK]', GREEN)
+              success = printout(settings.strings['testSuccess'], settings.colors['testSuccess'])
               dataUseCase['nb_ok'] += 1
             else:
-              success = printout('[KO]', RED)
+              success = printout(settings.strings['testFailure'], settings.colors['testFailure'])
               
-            to_print = success + ' [code: ' + str(dataTest['code']) + '] [' + str(dataTest['elapsed']) + 'ms] ' + to_print
+            output = settings.strings['testOutputFormat'].format(success=success, return_code=dataTest['code'], elapsed=dataTest['elapsed'], doc=func_doc)
             
           except Exception as e:
-            to_print = printout('[KO] [DIRTY]', RED) + to_print + str(e)
+            output = printout(settings.strings['testDirtyFailure'], settings.colors['testDirtyFailure']) + func_doc + str(e)
             
-          print to_print
+          print output
         
       dataTotal['index'] += dataUseCase['index']
       dataTotal['nb_ok'] += dataUseCase['nb_ok']
       self.printSetResult(u, dataUseCase['index'], dataUseCase['nb_ok'], 0)
     self.printTotalResult(dataTotal['index'], dataTotal['nb_ok'], 0)
-      
+
 if __name__ == "__main__":
   app = App()
   UseCase1()
