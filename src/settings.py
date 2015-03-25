@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+sets = [
+  'usecase1'
+]
+
 strings = {
   'intro': 'Launching tests\n',
   'setResult': 'Total for {className} : {nb_tests_passed} / {nb_tests_total} successful tests ({percent}%)\n---\n',
@@ -16,6 +20,7 @@ BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE = range(8)
 
 colors = {
   'intro': MAGENTA,
+  'setIntro': CYAN,
   'setResult': CYAN,
   'totalResult': MAGENTA,
   'buildOk': GREEN,
