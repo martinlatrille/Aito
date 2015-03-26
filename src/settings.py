@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
-sets = [
-  'usecase1',
-]
 
+# Strings of the application
 strings = {
   'intro': 'Launching tests\n',
   'setResult': 'Total for {className} : {nb_tests_passed} / {nb_tests_total} successful tests ({percent}%)\n---\n',
@@ -21,6 +19,7 @@ strings = {
 
 BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE = range(8)
 
+# Colors of the application
 colors = {
   'intro': MAGENTA,
   'setIntro': CYAN,

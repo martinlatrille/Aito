@@ -3,24 +3,24 @@
 import core
 import requests
 
-class UseCase1(core.UseCase):
+class Set1(core.TestSet):
   """
   Martin wants to register to letsbro
   """
 
-  def test_1(self):
+  def testPingGoogle(self):
     """
     He tries something
     """
     response = requests.get('http://google.com/')
     return self.expect(response, code=200)
 
-class UseCase5(core.UseCase):
+class Set2(core.TestSet):
   """
   Martin wants to register to letsbro
   """
 
-  def test_1(self):
+  def testPongGoogle(self):
     """
     He tries something
     """
