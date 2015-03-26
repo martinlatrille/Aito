@@ -5,24 +5,24 @@ import requests
 
 class Set1(core.TestSet):
   """
-  Martin wants to register to letsbro
+  Martin wants to ping google.com
   """
 
   def testPingGoogle(self):
     """
-    He tries something
+    He pings google.com
     """
     response = requests.get('http://google.com/')
     return self.expect(response, code=200)
 
 class Set2(core.TestSet):
   """
-  Martin wants to register to letsbro
+  Martin wants to ping facebook.com
   """
 
   def testPongGoogle(self):
     """
-    He tries something
+    He pings facebook.com
     """
-    response = requests.get('http://google.com/')
+    response = requests.get('http://facebook.com/')
     return self.expect(response, code=200)
