@@ -7,6 +7,7 @@ sys.path.append(os.path.realpath(__file__))
 
 # Local import
 import core, settings
+from colors import printout
 
 def getTestSets():
   """
@@ -31,4 +32,4 @@ if __name__ == "__main__":
     app = core.App()
     app.process(test_sets)
   else:
-    print 'yapadetest'
+    print printout(settings.strings['errorNoSetFound'], settings.colors['errors'])
