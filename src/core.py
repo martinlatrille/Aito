@@ -11,6 +11,8 @@ class TestSet:
   """
   All TestSets must inherit from this class
   """
+  _base_url = ""
+
   def setUp(self):
     """
     Called before the beginning of the test set
@@ -23,6 +25,26 @@ class TestSet:
     """
     return
 
+  def get(self, end_url, **kwargs):
+    url = self._base_url + end_url
+    return requests.get(url, **kwargs)
+
+  def post(self, end_url, data=None, json=None, **kwargs):
+    url = self._base_url + end_url
+    return requests.post(url, data, json, **kwargs)
+
+  def put(self, end_url, data=None, **kwargs):
+    url = self._base_url + end_url
+    return requests.put(url, data, **kwargs)
+
+  def patch(self, end_url, data=None, **kwargs):
+    url = self._base_url + end_url
+    return requests.patch(url, data, **kwargs)
+
+  def delete(self, end_url, **kwargs):
+    url = self._base_url + end_url
+    return requests.delete(url, **kwargs)
+
   def expect(self, response, code=None, body=None):
     """
     Return whether the response corresponds to what is expected or not
@@ -34,6 +56,7 @@ class TestSet:
 
     if body != None and body != response.body:
       success = False
+      print body
 
     return {'success': success, 'code': response.status_code, 'elapsed': response.elapsed}
 
@@ -88,52 +111,56 @@ class App:
     else:
       print printout(settings.strings['buildKo'], settings.colors['buildKo'])
 
-  def process(self, test_sets):
+  def process(self, modules):
     """
-    Process testsets
+    Process modules
     """
-    dataTotal = {}
-    dataTotal['index'] = 0
-    dataTotal['nb_ok'] = 0
+    data_total = {}
+    data_total['index'] = 0
+    data_total['nb_ok'] = 0
 
-    if len(test_sets) == 0:
+    if len(modules) == 0:
       self.printErrorNoSetFound()
       return
 
     self.printIntro()
 
-    for u in test_sets:
+    for test_set in modules:
 
-      self.printSetIntro(u)
+      self.printSetIntro(test_set)
 
-      dataTestSet = {}
-      dataTestSet['index'] = 0
-      dataTestSet['nb_ok'] = 0
+      data_test_set = {}
+      data_test_set['index'] = 0
+      data_test_set['nb_ok'] = 0
 
-      for f in dir(u):
+      test_set.setUp()
+
+      for f in dir(test_set):
         if re.match('test_*', f):
-          dataTestSet['index'] += 1
-          func = getattr(u, f)
+          data_test_set['index'] += 1
+          func = getattr(test_set, f)
           func_doc = func.__doc__.strip('\n')
 
           try:
-            dataTest = func()
+            data_test = func()
 
-            if dataTest['success']:
+            if data_test['success']:
               success = printout(settings.strings['testSuccess'], settings.colors['testSuccess'])
-              dataTestSet['nb_ok'] += 1
+              data_test_set['nb_ok'] += 1
             else:
               success = printout(settings.strings['testFailure'], settings.colors['testFailure'])
 
-            output = settings.strings['testOutputFormat'].format(success=success, return_code=dataTest['code'], elapsed=dataTest['elapsed'], doc=func_doc)
+            output = settings.strings['testOutputFormat'].format(success=success, return_code=data_test['code'], elapsed=data_test['elapsed'], doc=func_doc)
 
           except Exception as e:
             output = printout(settings.strings['testDirtyFailure'], settings.colors['testDirtyFailure']) + func_doc + str(e)
 
           print output
 
-      dataTotal['index'] += dataTestSet['index']
-      dataTotal['nb_ok'] += dataTestSet['nb_ok']
-      self.printSetResult(u, dataTestSet['index'], dataTestSet['nb_ok'], 0)
+      test_set.setDown()
 
-    self.printTotalResult(dataTotal['index'], dataTotal['nb_ok'], 0)
+      data_total['index'] += data_test_set['index']
+      data_total['nb_ok'] += data_test_set['nb_ok']
+      self.printSetResult(test_set, data_test_set['index'], data_test_set['nb_ok'], 0)
+
+    self.printTotalResult(data_total['index'], data_total['nb_ok'], 0)

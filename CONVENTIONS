@@ -1,3 +1,6 @@
-Class names :     CamelCase
-Function names :  lowerCamelCase
-Variable names :  underscore_case
+Class names     :  CamelCase
+  Attributes    :  _underscore_case
+  Method names  :  lowerCamelCase
+
+Function names  :  lowerCamelCase
+Variable names  :  underscore_case
