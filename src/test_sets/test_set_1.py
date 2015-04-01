@@ -1,53 +1,52 @@
 # -*- coding: utf-8 -*-
 
-import core
-import requests
+from core import TestSet
 
-class Set1(core.TestSet):
+class Set1(TestSet):
   """
-  Martin wants to ping http://www.google.com
+  Martin wants to ping http://google.com
   """
 
   def setUp(self):
-    self._base_url = 'http://www.google.com'
+    self._base_url = 'http://google.com'
 
   def testPingGoogleHome(self):
     """
-    He pings http://www.google.com
+    He pings http://google.com
     """
     response = self.get('/')
     return self.expect(response, code=200)
 
   def testPingGoogleImage(self):
     """
-    He pings https://www.google.com/imghp
+    He pings http://google.com/imghp
     """
     response = self.get('/imghp')
     return self.expect(response, code=200)
 
   def testPingGoogleNotFound(self):
     """
-    He pings https://www.google.com/imghpqsd
+    He pings http://google.com/imghpqsd
     """
     response = self.get('/imghpqsd')
     return self.expect(response, code=200)
 
   def testPingGoogleHome2(self):
     """
-    He pings http://www.google.com
+    He pings http://google.com
     """
     response = self.get('/')
     return self.expect(response, code=200)
 
-class Set2(core.TestSet):
+class Set2(TestSet):
   """
-  Martin wants to ping stackoverflow.com
+  Martin wants to ping http://stackoverflow.com
   """
   _base_url = 'http://stackoverflow.com'
 
   def testPingStackOvHome(self):
     """
-    He pings stackoverflow.com
+    He pings http://stackoverflow.com
     """
     response = self.get('/')
     return self.expect(response, code=200)
@@ -55,7 +54,7 @@ class Set2(core.TestSet):
 
   def testPingStackOvHome2(self):
     """
-    He pings stackoverflow.com
+    He pings http://stackoverflow.com
     """
     response = self.get('/')
     return self.expect(response, code=200)
@@ -63,7 +62,7 @@ class Set2(core.TestSet):
 
   def testPingStackOvHome3(self):
     """
-    He pings stackoverflow.com
+    He pings http://stackoverflow.com
     """
     response = self.get('/')
     return self.expect(response, code=200)
