@@ -163,4 +163,6 @@ class App:
       data_total['nb_ok'] += data_test_set['nb_ok']
       self.printSetResult(test_set, data_test_set['index'], data_test_set['nb_ok'], 0)
 
+
     self.printTotalResult(data_total['index'], data_total['nb_ok'], 0)
+    return 0 if data_total['index'] == data_total['nb_ok'] else 1

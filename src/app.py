@@ -30,6 +30,8 @@ if __name__ == "__main__":
 
   if len(test_sets) != 0:
     app = core.App()
-    app.process(test_sets)
+    code = app.process(test_sets)
+    sys.exit(code)
   else:
     print printout(settings.strings['errorNoSetFound'], settings.colors['errors'])
+    sys.exit(1)
