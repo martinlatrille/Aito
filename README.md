@@ -5,7 +5,7 @@ Extensible library to test REST APIs in Python
 
 ## Two lines test
 
-It's that simple.
+It's that simple :
 
     def testPingGoogleHome(self):
       """
@@ -13,3 +13,7 @@ It's that simple.
       """
       response = self.get('/')
       return self.expect(response, code=200)
+
+Returns :
+
+    [OK] [code : 200] [0:00:00.076603ms]    He pings http://google.com
