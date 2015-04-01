@@ -7,14 +7,14 @@ Extensible library to test REST APIs in Python
 
 It's that simple :
 
-    ```python
+```python
     def testPingGoogleHome(self):
       """
       He pings http://google.com
       """
       response = self.get('/')
       return self.expect(response, code=200)
-    ```
+```
 
 Returns :
 
