@@ -1,7 +1,5 @@
 # RESTinPy
-Extensible library to test REST APIs in Python
-
-[DIRTY] : means that your code raised an exception. Correct it and try again.
+Ultra-lightweight test suite focused on REST API continuous integration.
 
 ## Test a webservice in two lines
 
@@ -23,3 +21,7 @@ Returns :
 ## One dependency
 
 The only dependency of the RESTinPy project is `requests`.
+
+## Doc
+
+[DIRTY] : means that your code raised an exception. Correct it and try again.
