@@ -3,7 +3,9 @@ Ultra-lightweight test suite focused on REST API continuous integration.
 
 ## Usage
 ```shell
-restin.py [-h] [-p PACKAGE]
+restin.py [-h] [-p PACKAGE] [-v VERBOSITY]
+ -p PACKAGE / --package PACKAGE       the name of the package containing the modules to process
+ -v VERBOSITY / --verbosity VERBOSITY the desired output verbosity (0, 1 or 2)
 ```
 
 ## Test a webservice in two lines
