@@ -2,7 +2,7 @@
 
 from core import TestSet
 
-class Set1(TestSet):
+class SetDoesGoogleWork(TestSet):
   """
   Martin wants to ping http://google.com
   """
@@ -38,7 +38,7 @@ class Set1(TestSet):
     response = self.get('/')
     return self.expect(response, code=200)
 
-class Set2(TestSet):
+class SetDoesStackOverflowWork(TestSet):
   """
   Martin wants to ping http://stackoverflow.com
   """

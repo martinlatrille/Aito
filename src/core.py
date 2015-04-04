@@ -64,6 +64,8 @@ class App:
   """
   Main entry
   """
+  def __init__(self, verbosity):
+    self.verbosity = verbosity
 
   def printErrorNoSetFound(self):
     """
@@ -81,19 +83,28 @@ class App:
     """
     Print the set intro sentence, before the beginning of each test set
     """
-    print printout(u.__class__.__name__ + ': ' + u.__doc__, settings.colors['setIntro'])
+    if self.verbosity > 0:
+      print printout(u.__class__.__name__ + ': ' + u.__doc__, settings.colors['setIntro'])
+
+  def printTestOutput(self, output):
+    """
+    Print the output of a test
+    """
+    if self.verbosity > 1:
+      print output
 
   def printSetResult(self, test_set, nb_tests, nb_ok, total_response_time):
     """
     Print set results, after the end of each test set
     """
-    percent = int(100 * (float(nb_ok) / float(nb_tests)))
-    print printout(
-      settings.strings['setResult'].format(nb_tests_passed=nb_ok,
-                                           nb_tests_total=nb_tests,
-                                           percent=percent,
-                                           className=test_set.__class__.__name__),
-      settings.colors['setResult'])
+    if self.verbosity > 0:
+      percent = int(100 * (float(nb_ok) / float(nb_tests)))
+      print printout(
+        settings.strings['setResult'].format(nb_tests_passed=nb_ok,
+                                             nb_tests_total=nb_tests,
+                                             percent=percent,
+                                             className=test_set.__class__.__name__),
+        settings.colors['setResult'])
 
   def printTotalResult(self, nb_tests, nb_ok, total_response_time):
     """
@@ -155,7 +166,7 @@ class App:
           except Exception as e:
             output = printout(settings.strings['testDirtyFailure'], settings.colors['testDirtyFailure']) + func_doc + str(e)
 
-          print output
+          self.printTestOutput(output)
 
       test_set.setDown()
 

@@ -35,6 +35,7 @@ def getTestSets(package):
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(description="Ultra-lightweight test suite focused on REST API continuous integration.")
   parser.add_argument('-p', '--package', help='the package containing your test sets')
+  parser.add_argument('-v', '--verbosity', help='the verbosity of the output', type=int)
   args = parser.parse_args()
 
   if args.package:
@@ -43,7 +44,8 @@ if __name__ == "__main__":
     sys.exit(1)
 
   if len(test_sets) != 0:
-    app = core.App()
+    app = core.App(args.verbosity)
+
     code = app.process(test_sets)
     sys.exit(code)
   else:
