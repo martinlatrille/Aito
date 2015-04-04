@@ -35,5 +35,31 @@ The only dependency of the RESTinPy project is `requests`.
 
 ## Doc
 
+### Sample test set
+
+```python
+# -*- coding: utf-8 -*-
+
+from core import TestSet
+
+class SetDoesGoogleWork(TestSet):
+  """
+  Martin wants to ping http://google.com
+  """
+
+  def setUp(self):
+    self._base_url = 'http://google.com'
+
+  def testPingGoogleHome(self):
+    """
+    He pings http://google.com
+    """
+    response = self.get('/')
+    return self.expect(response, code=200)
+
+  def setDown(self):
+    print 'Goodbye testitest :('
+```
+
 [DIRTY] : means that your code raised an exception. Correct it and try again.
 
