@@ -61,5 +61,23 @@ class SetDoesGoogleWork(TestSet):
     print 'Goodbye testitest :('
 ```
 
-[DIRTY] : means that your code raised an exception. Correct it and try again.
+### Output signification
 
+[OK] : response was as expected.
+[KO] : response wasn't as expected.
+[KO] [DIRTY] : your code raised an exception. Correct it and try again.
+
+### TestSet.* prototypes
+
+```python
+# Overridable
+TestSet.setUp(self)
+TestSet.setDown(self)
+
+# Usable
+TestSet.get(self, end_url, **kwargs)
+TestSet.post(self, end_url, data=None, json=None, **kwargs)
+TestSet.put(self, end_url, data=None, **kwargs)
+TestSet.patch(self, end_url, data=None, **kwargs)
+TestSet.delete(self, end_url, **kwargs)
+```
