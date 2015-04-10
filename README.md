@@ -80,4 +80,6 @@ TestSet.post(self, end_url, data=None, json=None, **kwargs)
 TestSet.put(self, end_url, data=None, **kwargs)
 TestSet.patch(self, end_url, data=None, **kwargs)
 TestSet.delete(self, end_url, **kwargs)
+
+TestSet.expect(self, response, code=None, body=None)
 ```
