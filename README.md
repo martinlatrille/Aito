@@ -63,9 +63,9 @@ class SetDoesGoogleWork(TestSet):
 
 ### Output signification
 
-*[OK] : response was as expected.
-*[KO] : response wasn't as expected.
-*[KO] [DIRTY] : your code raised an exception. Correct it and try again.
+* [OK] : response was as expected.
+* [KO] : response wasn't as expected.
+* [KO] [DIRTY] : your code raised an exception. Correct it and try again.
 
 ### TestSet.* prototypes
 
