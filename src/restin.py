@@ -44,6 +44,10 @@ def run(args):
     print printout(settings.strings['errorNoSetFound'], settings.colors['errors'])
     sys.exit(1)
 
+def runserver(args):
+  print ('No server yet, come back later !')
+  sys.exit(0)
+
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(prog="rip", description="Ultra-lightweight test suite focused on REST API continuous integration.")
   subparsers = parser.add_subparsers(help='run to run the test suite, runserver to run the test server')
@@ -55,6 +59,7 @@ if __name__ == "__main__":
 
   server_parser = subparsers.add_parser('runserver', help='run the test server')
   server_parser.add_argument('PORT', help='the port on which the server must listens', type=int)
+  server_parser.set_defaults(func=runserver)
 
   args = parser.parse_args()
   args.func(args)
