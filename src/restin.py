@@ -32,17 +32,8 @@ def getTestSets(package):
 
   return test_sets
 
-if __name__ == "__main__":
-  parser = argparse.ArgumentParser(description="Ultra-lightweight test suite focused on REST API continuous integration.")
-  parser.add_argument('-p', '--package', help='the package containing your test sets')
-  parser.add_argument('-v', '--verbosity', help='the verbosity of the output', type=int)
-  args = parser.parse_args()
-
-  if args.package:
-    test_sets = getTestSets(args.package)
-  else:
-    print printout(settings.strings['errorNoSetFound'], settings.colors['errors'])
-    sys.exit(1)
+def run(args):
+  test_sets = getTestSets(args.package)
 
   if len(test_sets) != 0:
     app = core.App(args.verbosity)
@@ -52,3 +43,18 @@ if __name__ == "__main__":
   else:
     print printout(settings.strings['errorNoSetFound'], settings.colors['errors'])
     sys.exit(1)
+
+if __name__ == "__main__":
+  parser = argparse.ArgumentParser(prog="rip", description="Ultra-lightweight test suite focused on REST API continuous integration.")
+  subparsers = parser.add_subparsers(help='run to run the test suite, runserver to run the test server')
+
+  local_parser = subparsers.add_parser('run', help='run the test suite')
+  local_parser.add_argument('package', metavar='P', help='the path to the package containing your test sets')
+  local_parser.add_argument('-v', '--verbosity', help='the verbosity of the output', type=int)
+  local_parser.set_defaults(func=run)
+
+  server_parser = subparsers.add_parser('runserver', help='run the test server')
+  server_parser.add_argument('PORT', help='the port on which the server must listens', type=int)
+
+  args = parser.parse_args()
+  args.func(args)

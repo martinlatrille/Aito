@@ -5,6 +5,9 @@ import settings
 from colors import printout
 
 class LocalPrinter:
+  """
+  Print all outputs on standard output, with all the colors and stuff
+  """
   def __init__(self, verbosity):
     self.verbosity = verbosity
 
@@ -78,3 +81,9 @@ class LocalPrinter:
       print printout(settings.strings['buildOk'], settings.colors['buildOk'])
     else:
       print printout(settings.strings['buildKo'], settings.colors['buildKo'])
+
+
+class RemotePrinter:
+  """
+  Send all output JSON encoded through websocket, to the client who ordered the test session.
+  """
