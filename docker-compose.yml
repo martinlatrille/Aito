@@ -1,0 +1,2 @@
+testserver:
+  image: martinlatrille/restinpy
