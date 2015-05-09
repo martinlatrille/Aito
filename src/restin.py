@@ -41,6 +41,7 @@ if __name__ == "__main__":
   if args.package:
     test_sets = getTestSets(args.package)
   else:
+    print printout(settings.strings['errorNoSetFound'], settings.colors['errors'])
     sys.exit(1)
 
   if len(test_sets) != 0:
