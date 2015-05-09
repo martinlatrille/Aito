@@ -83,7 +83,10 @@ class LocalPrinter:
       print printout(settings.strings['buildKo'], settings.colors['buildKo'])
 
 
-class RemotePrinter:
+class WebPrinter:
   """
   Send all output JSON encoded through websocket, to the client who ordered the test session.
   """
+  def __init__(verbosity, websocket):
+    self.verbosity = verbosity
+    self.websocket = websocket

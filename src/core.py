@@ -64,11 +64,8 @@ class App:
   """
   Main entry
   """
-  def __init__(self, verbosity): #, output):
-    self.verbosity = verbosity
-
-    #if output.equals('local'):
-    self.printer = printers.LocalPrinter(verbosity)
+  def __init__(self, printer):
+    self.printer = printer
 
   def process(self, modules):
     """

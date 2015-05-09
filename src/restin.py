@@ -8,6 +8,8 @@ sys.path.append(os.path.realpath(__file__))
 # Local import
 import core, settings
 from colors import printout
+from serverapp import TestServer
+import printers
 
 def getTestSets(package):
   """
@@ -33,10 +35,13 @@ def getTestSets(package):
   return test_sets
 
 def run(args):
+  """
+  Run the test suite
+  """
   test_sets = getTestSets(args.package)
 
   if len(test_sets) != 0:
-    app = core.App(args.verbosity)
+    app = core.App(printers.LocalPrinter(args.verbosity))
 
     code = app.process(test_sets)
     sys.exit(code)
@@ -45,12 +50,14 @@ def run(args):
     sys.exit(1)
 
 def runserver(args):
-  print ('No server yet, come back later !')
-  sys.exit(0)
+  """
+  Run the test server
+  """
+  TestServer().run(args.port)
 
 if __name__ == "__main__":
-  parser = argparse.ArgumentParser(prog="rip", description="Ultra-lightweight test suite focused on REST API continuous integration.")
-  subparsers = parser.add_subparsers(help='run to run the test suite, runserver to run the test server')
+  parser = argparse.ArgumentParser(prog="rip", description="RESTinPy: ultra-lightweight test suite focused on REST API continuous integration.")
+  subparsers = parser.add_subparsers()
 
   local_parser = subparsers.add_parser('run', help='run the test suite')
   local_parser.add_argument('package', metavar='P', help='the path to the package containing your test sets')
@@ -58,7 +65,7 @@ if __name__ == "__main__":
   local_parser.set_defaults(func=run)
 
   server_parser = subparsers.add_parser('runserver', help='run the test server')
-  server_parser.add_argument('PORT', help='the port on which the server must listens', type=int)
+  server_parser.add_argument('port', metavar='P', help='the port on which the server must listens', type=int)
   server_parser.set_defaults(func=runserver)
 
   args = parser.parse_args()
