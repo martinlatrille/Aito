@@ -1,5 +1,5 @@
 FROM ubuntu
-MAINTAINER Martin Latrille
+MAINTAINER Martin Latrille <martin.amin.latrille@gmail.com>
 
 # Add the application resources URL
 RUN echo "deb http://archive.ubuntu.com/ubuntu/ $(lsb_release -sc) main universe" >> /etc/apt/sources.list
