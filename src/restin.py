@@ -7,7 +7,6 @@ sys.path.append(os.path.realpath(__file__))
 
 # Local import
 import core, settings
-from colors import printout
 from serverapp import TestServer
 import printers
 from helpers import getTestSets
@@ -17,14 +16,15 @@ def run(args):
   Run the test suite
   """
   test_sets = getTestSets(args.package)
+  printer = printers.LocalPrinter(args.verbosity)
 
   if len(test_sets) != 0:
-    app = core.App(printers.LocalPrinter(args.verbosity))
+    app = core.App(printer)
 
     code = app.process(test_sets)
     sys.exit(code)
   else:
-    print printout(settings.strings['errorNoSetFound'], settings.colors['errors'])
+    printer.printErrorNoSetFound()
     sys.exit(1)
 
 def runserver(args):
