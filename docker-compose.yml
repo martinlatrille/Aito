@@ -1,2 +1,7 @@
-testserver:
-  image: martinlatrille/restinpy
+web:
+  build: .
+  command: python src/restin.py runserver 5000
+  ports:
+    - 5000:5000
+  volumes:
+    - .:/code
