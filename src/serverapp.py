@@ -30,6 +30,7 @@ class TestServer:
       (r'/', server.handlers.IndexPageHandler),
       (r'/version', server.handlers.VersionHandler),
       # Websocket Handlers
+      (r'/test', server.handlers.TestWSHandler),
       #(r'/ws', server.handlers.WaveFlowHandler),
     ]
 

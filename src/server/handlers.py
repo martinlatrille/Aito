@@ -1,10 +1,18 @@
 # -*- coding: utf-8 -*-
 
+# Python import
+import sys
+
+# Tornado import
 import tornado.web
 import tornado.websocket
 import tornado.httpserver
 import tornado.ioloop
-import sys
+
+# Local import
+from helpers import getTestSets
+import core
+import printers
 
 listeners = {}
 
@@ -30,12 +38,23 @@ class VersionHandler(BaseHandler):
     response = {"name": "RESTinPy", "version": "0.3.1"}
     self.write(response)
 
-"""
-class WaveFlowHandler(tornado.websocket.WebSocketHandler):
+class TestWSHandler(tornado.websocket.WebSocketHandler):
   def check_origin(self, origin):
     return True
 
   def open(self):
+    test_sets = getTestSets("src/test_sets")
+
+    if len(test_sets) != 0:
+      app = core.App(printers.WebPrinter(2, self))
+      code = app.process(test_sets)
+      self.close
+      sys.exit(code)
+    else:
+      self.write_message(settings.strings['errorNoSetFound'])
+      sys.exit(1)
+
+"""
     uid = self.get_secure_cookie("user")
     wid = self.get_secure_cookie("wave")
 
@@ -58,7 +77,6 @@ class WaveFlowHandler(tornado.websocket.WebSocketHandler):
     #for [u_uid, u_fn, u_socket] in listeners[str(wid)]:
 
 
-    self.write_message("Welcome " + firstname + " ! You're now connected.")
 
   def on_message(self, message):
     wid = self.get_secure_cookie("wave")

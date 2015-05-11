@@ -106,7 +106,7 @@ class App:
 
             self.printer.printTestOutput(data_test, func_doc)
           except Exception as e:
-            self.printer.printTestDirtyFailure({'success': False, 'dirty': True, 'exception': e})
+            self.printer.printTestDirtyFailure({'success': False, 'exception': e})
 
 
       test_set.setDown()
