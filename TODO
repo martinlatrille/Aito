@@ -1,5 +1,5 @@
 # TODO
 
-[ ] Add support for test modules passed in parameters in command line
+[X] Add support for test modules passed in parameters in command line
 [ ] Add built-in HTTP server w/ WebAPI to enable the suite to be launched and results to be retrieved from the Internet
 [ ] Review setting var names to match it with CONVENTIONS

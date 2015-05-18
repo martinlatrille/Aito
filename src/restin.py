@@ -39,11 +39,11 @@ if __name__ == "__main__":
 
   local_parser = subparsers.add_parser('run', help='run the test suite')
   local_parser.add_argument('package', metavar='P', help='the path to the package containing your test sets')
-  local_parser.add_argument('-v', '--verbosity', help='the verbosity of the output', type=int)
+  local_parser.add_argument('-v', '--verbosity', metavar='V', help='set the verbosity of the output : 0, 1 or 2 (default)', type=int, default=2)
   local_parser.set_defaults(func=run)
 
   server_parser = subparsers.add_parser('runserver', help='run the test server')
-  server_parser.add_argument('port', metavar='P', help='the port on which the server must listens', type=int)
+  server_parser.add_argument('-p', '--port', metavar='P', help='set the port on which the server must listens, default is 5000', type=int, default=5000)
   server_parser.set_defaults(func=runserver)
 
   args = parser.parse_args()
