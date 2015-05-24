@@ -1,9 +1,9 @@
-# RESTinPy
+# Aito
 Ultra-lightweight test suite focused on REST API continuous integration.
 
 ## Usage
 ```shell
-restin.py [-h] [-p PACKAGE] [-v VERBOSITY]
+aito.py [-h] [-p PACKAGE] [-v VERBOSITY]
  -p PACKAGE / --package PACKAGE
         the name of the package containing the modules to process
  -v VERBOSITY / --verbosity VERBOSITY
@@ -31,7 +31,7 @@ Returns :
 
 ## One dependency
 
-The only dependency of the RESTinPy project is `requests`.
+The only dependency of the Aito project is `requests`.
 
 ## Doc
 
