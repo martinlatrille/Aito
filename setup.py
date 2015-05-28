@@ -2,8 +2,8 @@ from distutils.core import setup
 
 setup(
   name = 'Aito',
-  packages = ['aito', 'aito.test_sets'],
-  scripts = ['bin/aito'],
+  packages = ['libaito', 'libaito.test_sets'],
+  scripts = ['bin/libaito'],
   version = '0.5.5',
   description = 'Ultra-lightweight test suite focused on REST API end-to-end tests.',
   author = 'Martin Latrille',
