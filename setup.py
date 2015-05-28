@@ -4,7 +4,7 @@ setup(
   name = 'Aito',
   packages = ['aito', 'aito.test_sets'],
   scripts = ['bin/aito.py'],
-  version = '0.5.2',
+  version = '0.5.3',
   description = 'Ultra-lightweight test suite focused on REST API end-to-end tests.',
   author = 'Martin Latrille',
   author_email = 'martinlatrille@live.fr',
