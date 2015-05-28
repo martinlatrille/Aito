@@ -1,12 +1,15 @@
 # Aito
-Ultra-lightweight test suite focused on REST API continuous integration.
+Ultra-lightweight test suite focused on REST API end-to-end tests.
 
 ## Usage
 ```shell
-aito.py [-h] [-p PACKAGE] [-v VERBOSITY]
- -p PACKAGE / --package PACKAGE
-        the name of the package containing the modules to process
- -v VERBOSITY / --verbosity VERBOSITY
+
+aito runtest [-h] [-p P] [-v V]
+ -h, --help
+        show this help message and exit
+ -p P, --package P
+        the path to the package containing your test sets, default at "./tests"
+ -v V, --verbosity V
         the desired output verbosity (0, 1 or 2)
 ```
 
@@ -34,6 +37,14 @@ Returns :
 The only dependency of the Aito project is `requests`.
 
 ## Doc
+
+### Basic setup
+- install Aito in your development environment (`pip install aito`)
+- create a `tests` directory which will contain all your tests (`mkdir tests`)
+- in this directory, `touch __init__.py`, then create as many tests packages as you want (`mkdir user_case_1 && cd user_case_1 && touch __init__.py`)
+- in those directories, or the root tests directory if you didn't create any packages, place your tests files (see below for an example of test file)
+- go back to the root of your project, and `aito runtest`
+- enjoy
 
 ### Sample test set
 
