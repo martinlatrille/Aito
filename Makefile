@@ -1,2 +1,2 @@
 test:
-	python src/aito.py run src/test_sets -v 2
+	python src/aito.py runtest src/test_sets -v 2
