@@ -2,8 +2,9 @@ from distutils.core import setup
 
 setup(
   name = 'Aito',
-  packages = ['aito'], # this must be the same as the name above
-  version = '0.5',
+  packages = ['aito', 'aito.test_sets'],
+  scripts = ['bin/aito.py'],
+  version = '0.5.2:',
   description = 'Ultra-lightweight test suite focused on REST API end-to-end tests.',
   author = 'Martin Latrille',
   author_email = 'martinlatrille@live.fr',
@@ -11,4 +12,7 @@ setup(
   download_url = 'https://github.com/martinlatrille/Aito/tarball/0.5', # I'll explain this in a second
   keywords = ['testing', 'REST', 'api', 'end-to-end'], # arbitrary keywords
   classifiers = [],
+  install_requires = [
+    "requests >= 2.6.0",
+  ],
 )

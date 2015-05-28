@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 # Python import
@@ -6,9 +7,9 @@ import re, sys, os, argparse
 sys.path.append(os.path.realpath(__file__))
 
 # Local import
-import core, settings
-import printers
-from helpers import getTestSets
+import aito.core, aito.settings
+import aito.printers
+from aito.helpers import getTestSets
 
 def run(args):
   """
