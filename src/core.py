@@ -56,7 +56,7 @@ class TestSet:
 
     if body != None and body != response.body:
       success = False
-      print body
+      #print body
 
     return {'success': success, 'code': response.status_code, 'elapsed': response.elapsed}
 

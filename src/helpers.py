@@ -5,7 +5,11 @@ def getTestSets(package):
   """
   Get test sets from files in ./test_sets/
   """
-  package_path, package_name = package.rsplit('/', 1)
+  if '/' in package:
+    package_path, package_name = package.rsplit('/', 1)
+  else:
+    package_path = '.'
+    package_name = package
   sys.path.append(os.path.realpath(package_path))
 
   try:
