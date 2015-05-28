@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
   name = 'Aito',
-  packages = ['Aito'], # this must be the same as the name above
+  packages = ['aito'], # this must be the same as the name above
   version = '0.5',
   description = 'Ultra-lightweight test suite focused on REST API end-to-end tests.',
   author = 'Martin Latrille',
