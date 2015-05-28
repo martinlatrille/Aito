@@ -2,9 +2,9 @@ from distutils.core import setup
 
 setup(
   name = 'Aito',
-  packages = ['libaito', 'libaito.test_sets'],
+  packages = ['aito', 'aito.test_sets'],
   scripts = ['bin/aito'],
-  version = '0.5.3',
+  version = '0.5.4',
   description = 'Ultra-lightweight test suite focused on REST API end-to-end tests.',
   author = 'Martin Latrille',
   author_email = 'martinlatrille@live.fr',
