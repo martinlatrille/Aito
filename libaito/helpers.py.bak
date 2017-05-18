@@ -15,8 +15,8 @@ def getTestSets(package):
     try:
         __package__ = __import__(package_name)
     except Exception as e:
-        print(e.__class__)
-        print('No such package.')
+        print e.__class__
+        print 'No such package.'
         sys.exit(1)
 
     test_sets = []

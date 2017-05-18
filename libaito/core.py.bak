@@ -4,8 +4,8 @@
 import re, requests
 
 # Local imports
-from . import settings
-from . import printers
+import settings
+import printers
 
 class TestSet:
   """
