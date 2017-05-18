@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import core
-import helpers
-import printers
-import settings
+from . import core
+from . import helpers
+from . import printers
+from . import settings
